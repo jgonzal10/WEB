@@ -16,6 +16,9 @@ var DeveloperService = (function () {
     DeveloperService.prototype.getDevelopers = function () {
         return Promise.resolve(mock_developers_1.DEVELOPERS);
     };
+    DeveloperService.prototype.getDeveloper = function (id) {
+        return Promise.resolve(mock_developers_1.DEVELOPERS).then(function (developers) { return developers.filter(function (developer) { return developer.id === id; })[0]; });
+    };
     DeveloperService.prototype.getHeroesSlowly = function () {
         return new Promise(function (resolve) {
             return setTimeout(function () { return resolve(mock_developers_1.DEVELOPERS); }, 2000);

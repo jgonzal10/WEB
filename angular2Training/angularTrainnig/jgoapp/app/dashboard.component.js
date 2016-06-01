@@ -10,21 +10,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var developer_service_1 = require('./developer.service');
+var router_deprecated_1 = require('@angular/router-deprecated');
 var DashboardComponent = (function () {
-    function DashboardComponent(developerService) {
+    function DashboardComponent(router, developerService) {
+        this.router = router;
         this.developerService = developerService;
+        this.developers = [];
     }
     DashboardComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.developerService.getDevelopers().then(function (developers) { return _this.developers = developers.slice(1, 6); });
     };
-    DashboardComponent.prototype.gotoDetail = function () { };
+    DashboardComponent.prototype.gotoDetail = function (developer) {
+        var link = ['DeveloperDetail', { id: developer.id }];
+        this.router.navigate(link);
+    };
     DashboardComponent = __decorate([
         core_1.Component({
             selector: 'my-dashboard',
             templateUrl: 'app/views/dashboard.component.html',
+            styleUrls: ['styles/dashboard.component.css'],
         }), 
-        __metadata('design:paramtypes', [developer_service_1.DeveloperService])
+        __metadata('design:paramtypes', [router_deprecated_1.Router, developer_service_1.DeveloperService])
     ], DashboardComponent);
     return DashboardComponent;
 }());

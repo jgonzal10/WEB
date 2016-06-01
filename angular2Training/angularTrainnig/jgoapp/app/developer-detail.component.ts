@@ -1,21 +1,34 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { RouteParams } from '@angular/router-deprecated';
 import { Developer } from './developer';
+import { DeveloperService } from './developer.service';
+
+
+
+
 @Component({
   selector: 'my-developer-detail',
-  template:`
-    <div *ngIf="developer">
-      <h2>{{developer.name}} details!</h2>
-      <div><label>id: </label>{{developer.id}}</div>
-      <div>
-        <label>name: </label>
-        <input [(ngModel)]="developer.name" placeholder="name"/>
-      </div>
-    </div>
-  `,
+  templateUrl:'views/developer-detail.component.html',
+  styleUrls: ['styles/developer-detail.component.css'],
  
 })
-export class DeveloperDetailComponent {
- @Input() 
+export class DeveloperDetailComponent implements OnInit{
+  @Input() developer: Developer;
+  @Output() close = new EventEmitter();
   developer: Developer;
+
+  constructor(
+  private developerService: DeveloperService,
+  private routeParams: RouteParams) {
+}
+
+  ngOnInit() {
+    let id = +this.routeParams.get('id');
+    this.developerService.getDeveloper(id).then(developer => this.developer = developer);
+  }
+
+  goBack() {
+  window.history.back();
+}
 
 }

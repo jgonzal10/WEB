@@ -6,7 +6,15 @@ export class DeveloperService {
 	getDevelopers(){
 		return Promise.resolve(DEVELOPERS);
 
+
+
 	}
+	getDeveloper(id: number) {
+  return Promise.resolve(DEVELOPERS).then(
+    developers => developers.filter(developer => developer.id === id)[0]
+  );
+}
+
 
 	getHeroesSlowly() {
     return new Promise<Developer[]>(resolve =>

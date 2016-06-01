@@ -18,6 +18,7 @@ import { DashboardComponent } from './dashboard.component';
   </nav>
   <router-outlet></router-outlet>
   `,
+  styleUrls: ['styles/app.component.css'],
   directives: [ROUTER_DIRECTIVES],
   providers: [ROUTER_PROVIDERS, DeveloperService]
 })
